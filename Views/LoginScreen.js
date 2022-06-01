@@ -39,7 +39,7 @@ const LoginScreen = () => {
       setTimeout(() => {
         controller.abort();
       }, 5000);
-      const data = await fetch('https://api.loomischile.cl/control/', {
+      const data = await fetch('https://api.loomischile.cl/', {
         method: 'POST',
         body: JSON.stringify(user),
         headers: {
@@ -94,6 +94,27 @@ const LoginScreen = () => {
       }
     })();
   }, []);
+
+  useEffect(() => {
+    // fetch("https://api.loomischile.cl/control/",{
+    //   headers: {
+    //     "Accept": "application/json",
+    //     "Access-Control-Allow-Origin" : "*"
+    //   }
+    // }).then(resp => console.log(resp)).catch(err => console.log(err))
+
+    getMovies();
+  }, []);
+
+  const getMovies = async () => {
+    try {
+      const response = await fetch('https://api.loomischile.cl/control/');
+      const json = await response.json();
+      console.log(json);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <KeyboardAwareScrollView>
